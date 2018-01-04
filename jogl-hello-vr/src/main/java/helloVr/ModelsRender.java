@@ -211,9 +211,9 @@ public class ModelsRender {
             } else {
                 models.add(model);
             }
-
-            renderModels.FreeRenderModel.apply(renderModel);
-            renderModels.FreeTexture.apply(renderModelTexture);
+// fixme free model
+//            renderModels.FreeRenderModel.apply(renderModel);
+//            renderModels.FreeTexture.apply(renderModelTexture);
         };
 
         return model;

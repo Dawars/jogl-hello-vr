@@ -54,7 +54,7 @@ import one.util.streamex.IntStreamEx;
  */
 public class Scene {
 
-    private final String TEXTURE_PATH = "src/helloVr/asset/cube_texture.png", SHADERS_SRC = "scene";
+    private final String TEXTURE_PATH = "src/main/resources/cube_texture.png", SHADERS_SRC = "scene";
 
     private Program program;
 

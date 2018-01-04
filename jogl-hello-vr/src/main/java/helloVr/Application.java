@@ -39,8 +39,6 @@ import glm.vec._2.i.Vec2i;
 import glutil.BufferUtils;
 import glutil.GlDebugOutput;
 import one.util.streamex.IntStreamEx;
-import vr.HmdMatrix34_t;
-import vr.HmdMatrix44_t;
 import vr.IVRCompositor_FnTable;
 import vr.IVRSystem;
 import vr.Texture_t;
@@ -55,7 +53,7 @@ import vr.VREvent_t;
  */
 public class Application implements GLEventListener, KeyListener {
 
-    public static final String SHADERS_ROOT = "/helloVr/shaders";
+    public static final String SHADERS_ROOT = "src/main/resources/shaders";
 
     private static GLWindow glWindow;
     private static Animator animator;
