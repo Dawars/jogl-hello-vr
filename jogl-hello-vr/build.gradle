@@ -19,7 +19,7 @@ dependencies {
     compile("io.github.java-graphics:javaUnofficialOpenglSDK:1.0.1")
     compile("one.util:streamex:0.6.6")
 
-    compile "net.java.dev.jna:jna:4.2.2"
+    compile "net.java.dev.jna:jna:4.5.1"
 }
 
 repositories {
