@@ -5,39 +5,23 @@ group = 'me.dawars'
 sourceCompatibility = 1.8
 
 dependencies {
-//    compile project(":../../jopenvr")
-    compile fileTree(dir: 'lib', include: ['*.jar'])
-
-/*
-    compile "net.java.dev.jna:jna:4.2.2"
+    compile project(":../../jopenvr")
 
     def jogl = "2.3.2"
 
-    compile group: 'org.jogamp.jogl', name: 'nativewindow-main', version: '2.3.2'
+    compile("org.jogamp.jogl:nativewindow-main:$jogl")
+    compile("org.jogamp.jogl:newt-main:$jogl")
+
     compile("org.jogamp.gluegen:gluegen-rt-main:$jogl")
     compile("org.jogamp.jogl:jogl-all-main:$jogl")
 
     compile("io.github.java-graphics:glm:1.0.1")
     compile("io.github.java-graphics:javaUnofficialOpenglSDK:1.0.1")
-    compile("one.util:streamex:0.6.6")*/
+    compile("one.util:streamex:0.6.6")
+
+    compile "net.java.dev.jna:jna:4.2.2"
 }
 
 repositories {
     mavenCentral()
-//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-//    maven { url 'https://jitpack.io'
-//    }
 }
-//
-//task packageSources(type: Jar, dependsOn: 'classes') {
-//    from sourceSets.main.allSource
-//    classifier = 'sources'
-//}
-
-//jar {
-//    /** This line of code recursively collects and copies all of a project's files and adds them to the JAR itself.
-//     One can extend this task, to skip certain files or particular types at will */
-//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-//}
-
-//artifacts { archives packageSources }
