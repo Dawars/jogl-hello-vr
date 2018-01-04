@@ -368,7 +368,7 @@ public class Application implements GLEventListener, KeyListener {
 
         for (int device = 0; device < VR.k_unMaxTrackedDeviceCount; device++) {
 
-            if (trackedDevicePose[device].bPoseIsValid == 1) {
+            if (trackedDevicePose[device].bPoseIsValid != 0) {
 
                 validPoseCount++;
                 mat4DevicePose[device].set(trackedDevicePose[device].mDeviceToAbsoluteTracking);
@@ -405,7 +405,7 @@ public class Application implements GLEventListener, KeyListener {
                 }
             }
         }
-        if (trackedDevicePose[VR.k_unTrackedDeviceIndex_Hmd].bPoseIsValid == 1) {
+        if (trackedDevicePose[VR.k_unTrackedDeviceIndex_Hmd].bPoseIsValid != 0) {
             mat4DevicePose[VR.k_unTrackedDeviceIndex_Hmd].inverse(hmdPose);
         }
     }
@@ -455,7 +455,7 @@ public class Application implements GLEventListener, KeyListener {
 
         // Process SteamVR events
         VREvent_t event = new VREvent_t();
-        while (hmd.PollNextEvent.apply(event, event.size()) != 0) {
+        while (hmd.PollNextEvent.apply(event, event.size())) {
 
             processVREvent(gl4, event);
         }
@@ -465,7 +465,7 @@ public class Application implements GLEventListener, KeyListener {
 
             VRControllerState_t state = new VRControllerState_t();
 
-            if (hmd.GetControllerState.apply(device, state) != 0) {
+            if (hmd.GetControllerState.apply(device, state)) {
 
                 rbShowTrackedDevice[device] = state.ulButtonPressed == 0;
 

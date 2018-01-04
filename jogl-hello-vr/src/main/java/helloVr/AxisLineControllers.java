@@ -81,7 +81,7 @@ public class AxisLineControllers {
 
     public void render(GL4 gl4, Application app) {
 
-        if (app.hmd.IsInputFocusCapturedByAnotherProcess.apply() == 0) {
+        if (!app.hmd.IsInputFocusCapturedByAnotherProcess.apply()) {
 
             gl4.glUseProgram(program.name);
             gl4.glUniformMatrix4fv(program.matrixUL, 1, false, app.matBuffer);
@@ -94,7 +94,7 @@ public class AxisLineControllers {
     public void update(GL4 gl4, Application app) {
 
         // don't draw controllers if somebody else has input focus
-        if (app.hmd.IsInputFocusCapturedByAnotherProcess.apply() == 1) {
+        if (app.hmd.IsInputFocusCapturedByAnotherProcess.apply()) {
             return;
         }
 
@@ -105,7 +105,7 @@ public class AxisLineControllers {
         for (int trackedDevice = VR.k_unTrackedDeviceIndex_Hmd + 1; trackedDevice < VR.k_unMaxTrackedDeviceCount;
                 trackedDevice++) {
 
-            if (app.hmd.IsTrackedDeviceConnected.apply(trackedDevice) == 0) {
+            if (!app.hmd.IsTrackedDeviceConnected.apply(trackedDevice)) {
                 continue;
             }
 

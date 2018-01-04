@@ -60,7 +60,7 @@ public class ModelsRender {
         for (int trackedDevice = VR.k_unTrackedDeviceIndex_Hmd + 1; trackedDevice < VR.k_unMaxTrackedDeviceCount;
                 trackedDevice++) {
 
-            if (hmd.IsTrackedDeviceConnected.apply(trackedDevice) == 0) {
+            if (!hmd.IsTrackedDeviceConnected.apply(trackedDevice)) {
                 continue;
             }
             setupRenderModelForTrackedDevice(gl4, trackedDevice, hmd);
@@ -225,7 +225,7 @@ public class ModelsRender {
         gl4.glUseProgram(program.name);
 
         for (int trackedDevice = 0; trackedDevice < VR.k_unMaxTrackedDeviceCount; trackedDevice++) {
-            if (app.rbShowTrackedDevice[trackedDevice] == false) {
+            if (!app.rbShowTrackedDevice[trackedDevice]) {
                 continue;
             }
             if (trackedDeviceToRenderModel[trackedDevice] == null || !showTrackedDevice[trackedDevice]) {
@@ -237,7 +237,7 @@ public class ModelsRender {
                 continue;
             }
 
-            if (app.hmd.IsInputFocusCapturedByAnotherProcess.apply() == 1 && app.hmd.GetTrackedDeviceClass.apply(trackedDevice)
+            if (app.hmd.IsInputFocusCapturedByAnotherProcess.apply() && app.hmd.GetTrackedDeviceClass.apply(trackedDevice)
                     == VR.ETrackedDeviceClass.TrackedDeviceClass_Controller) {
                 continue;
             }
