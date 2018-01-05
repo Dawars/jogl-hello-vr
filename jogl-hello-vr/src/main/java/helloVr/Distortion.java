@@ -89,7 +89,8 @@ public class Distortion {
 
                 vert.position = new Vec2(xOffset + u, -1 + 2 * y * h);
 
-                DistortionCoordinates_t dc0 = hmd.ComputeDistortion.apply(VR.EVREye.EYE_Left, u, v);
+                DistortionCoordinates_t dc0=new DistortionCoordinates_t();
+                hmd.ComputeDistortion.apply(VR.EVREye.Eye_Left, u, v, dc0);
 
                 vert.texCoordRed = new Vec2(dc0.rfRed[0], 1 - dc0.rfRed[1]);
                 vert.texCoordGreen = new Vec2(dc0.rfGreen[0], 1 - dc0.rfGreen[1]);
@@ -112,7 +113,8 @@ public class Distortion {
 
                 vert.position = new Vec2(xOffset + u, -1 + 2 * y * h);
 
-                DistortionCoordinates_t dc0 = hmd.ComputeDistortion.apply(VR.EVREye.Eye_Right, u, v);
+                DistortionCoordinates_t dc0 = new DistortionCoordinates_t();
+                hmd.ComputeDistortion.apply(VR.EVREye.Eye_Right, u, v, dc0);
 
                 vert.texCoordRed = new Vec2(dc0.rfRed[0], 1 - dc0.rfRed[1]);
                 vert.texCoordGreen = new Vec2(dc0.rfGreen[0], 1 - dc0.rfGreen[1]);
@@ -231,7 +233,7 @@ public class Distortion {
             gl4.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             // left lens (first half of index array ), right lens (second half of index array )
             gl4.glDrawElements(GL_TRIANGLES, indexSize / 2, GL_UNSIGNED_SHORT,
-                    eye == VR.EVREye.EYE_Left ? 0 : indexSize); // indexSize / 2 * Short.Bytes = indexSize
+                    eye == VR.EVREye.Eye_Left ? 0 : indexSize); // indexSize / 2 * Short.Bytes = indexSize
         }
         gl4.glBindVertexArray(0);
         gl4.glUseProgram(0);

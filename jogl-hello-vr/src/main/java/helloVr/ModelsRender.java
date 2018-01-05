@@ -154,10 +154,7 @@ public class ModelsRender {
             
             while (true) {
 
-                Pointer stringPointer = new Memory(modelName.length() + 1);
-                stringPointer.setString(0, modelName);
-
-                error = renderModels.LoadRenderModel_Async.apply(stringPointer, modelPtr);
+                error = renderModels.LoadRenderModel_Async.apply(modelName, modelPtr);
 
                 if (error != VR.EVRRenderModelError.VRRenderModelError_Loading) {
                     break;

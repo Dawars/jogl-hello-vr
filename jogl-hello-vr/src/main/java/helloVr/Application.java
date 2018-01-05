@@ -204,7 +204,7 @@ public class Application implements GLEventListener, KeyListener {
             return new Mat4();
         }
         float nearClip = 0.1f, farClip = 30.0f;
-        return new Mat4(hmd.GetProjectionMatrix.apply(eye, nearClip, farClip, VR.EGraphicsAPIConvention.API_OpenGL));
+        return new Mat4(hmd.GetProjectionMatrix.apply(eye, nearClip, farClip));
     }
 
     private Mat4 getHmdMatrixPoseEye(int eye) {
@@ -269,7 +269,7 @@ public class Application implements GLEventListener, KeyListener {
 
             for (int eye = 0; eye < VR.EVREye.Max; eye++) {
                 eyeTexture[eye].set(eyeDesc[eye].textureName.get(FramebufferDesc.Target.RESOLVE),
-                        VR.EGraphicsAPIConvention.API_OpenGL, VR.EColorSpace.ColorSpace_Gamma);
+                        VR.ETextureType.TextureType_OpenGL, VR.EColorSpace.ColorSpace_Gamma);
                 compositor.Submit.apply(eye, eyeTexture[eye], null, VR.EVRSubmitFlags.Submit_Default);
             }
         }
@@ -368,7 +368,7 @@ public class Application implements GLEventListener, KeyListener {
 
         for (int device = 0; device < VR.k_unMaxTrackedDeviceCount; device++) {
 
-            if (trackedDevicePose[device].bPoseIsValid != 0) {
+            if (trackedDevicePose[device].bPoseIsValid == 1) {
 
                 validPoseCount++;
                 mat4DevicePose[device].set(trackedDevicePose[device].mDeviceToAbsoluteTracking);
@@ -389,8 +389,8 @@ public class Application implements GLEventListener, KeyListener {
                             devClassChar[device] = 'I';
                             break;
 
-                        case VR.ETrackedDeviceClass.TrackedDeviceClass_Other:
-                            devClassChar[device] = 'O';
+                        case VR.ETrackedDeviceClass.TrackedDeviceClass_GenericTracker:
+                            devClassChar[device] = 'G';
                             break;
 
                         case VR.ETrackedDeviceClass.TrackedDeviceClass_TrackingReference:
@@ -405,7 +405,7 @@ public class Application implements GLEventListener, KeyListener {
                 }
             }
         }
-        if (trackedDevicePose[VR.k_unTrackedDeviceIndex_Hmd].bPoseIsValid != 0) {
+        if (trackedDevicePose[VR.k_unTrackedDeviceIndex_Hmd].bPoseIsValid == 1) {
             mat4DevicePose[VR.k_unTrackedDeviceIndex_Hmd].inverse(hmdPose);
         }
     }
@@ -465,7 +465,7 @@ public class Application implements GLEventListener, KeyListener {
 
             VRControllerState_t state = new VRControllerState_t();
 
-            if (hmd.GetControllerState.apply(device, state)) {
+            if (hmd.GetControllerState.apply(device, state, state.size())) {
 
                 rbShowTrackedDevice[device] = state.ulButtonPressed == 0;
 
